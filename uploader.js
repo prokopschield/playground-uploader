@@ -97,7 +97,6 @@ function send(o) {
 			if (res.token) token = res.token;
 			if (res.error) console.log(res.error);
 			if (res.message) console.log(res.message);
-			//console.log({req: o, res});
 			accept(res);
 		})
 	);
