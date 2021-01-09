@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# uploader-specific files
+module_installer.js
+package-lock.json
+playground-credentials.json
