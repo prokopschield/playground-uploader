@@ -130,47 +130,47 @@ function promptUserLogin(callback) {
 				passwordStore(playgroundi) ||
 				await ask('Password').then(password => blake(password))
 			);
-			((passwordi) => {
-				password = passwordi;
-				send({
-						action: 'login',
-						playground: playgroundi
-					})
-					.then(() => send({
-						action: 'login',
-						playground: playgroundi
-					}))
-					.then((o) => {
-						if (o.login === 'success') {
-							playground = playgroundi;
-							passwordStore(playground, password);
-							process.nextTick(callback, playground);
-						} else {
-							ask('Password').then(password => blake(password))
-								.then(passwd => {
-									password = passwd;
-									send({
-											action: 'login',
-											playground: playgroundi
-										})
-										.then(() => send({
-											action: 'login',
-											playground: playgroundi
-										}))
-										.then((o) => {
-											if (o.login === 'success') {
-												playground = playgroundi;
-												passwordStore(playground, password);
-												process.nextTick(callback, playground);
-											} else {
-												console.log('Incorrect credentials!');
-												process.nextTick(promptUserLogin, callback);
-											}
-										})
-								})
-						}
-					})
-			})(passwordi)
+			
+			password = passwordi;
+			send({
+					action: 'login',
+					playground: playgroundi
+				})
+				.then(() => send({
+					action: 'login',
+					playground: playgroundi
+				}))
+				.then((o) => {
+					if (o.login === 'success') {
+						playground = playgroundi;
+						passwordStore(playground, password);
+						process.nextTick(callback, playground);
+					} else {
+						ask('Password').then(password => blake(password))
+							.then(passwd => {
+								password = passwd;
+								send({
+										action: 'login',
+										playground: playgroundi
+									})
+									.then(() => send({
+										action: 'login',
+										playground: playgroundi
+									}))
+									.then((o) => {
+										if (o.login === 'success') {
+											playground = playgroundi;
+											passwordStore(playground, password);
+											process.nextTick(callback, playground);
+										} else {
+											console.log('Incorrect credentials!');
+											process.nextTick(promptUserLogin, callback);
+										}
+									})
+							})
+					}
+				})
+			
 		})
 }
 
