@@ -146,9 +146,8 @@ function promptUserLogin(callback) {
 						passwordStore(playground, password);
 						process.nextTick(callback, playground);
 					} else {
-						ask('Password').then(password => blake(password))
-							.then(passwd => {
-								password = passwd;
+						ask('Password').then(p => password = blake(p))
+							.then(() => {
 								send({
 										action: 'login',
 										playground: playgroundi
