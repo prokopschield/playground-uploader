@@ -126,12 +126,11 @@ function promptUserLogin(callback) {
 	ask('Playground')
 		.then(p => p.toLowerCase().replace(/[^a-z]/, ''))
 		.then(async (playgroundi) => {
-			let passwordi = (
+			password = (
 				passwordStore(playgroundi) ||
-				await ask('Password').then(password => blake(password))
+				await ask('Password').then(passwordi => blake(passwordi))
 			);
 			
-			password = passwordi;
 			send({
 					action: 'login',
 					playground: playgroundi
