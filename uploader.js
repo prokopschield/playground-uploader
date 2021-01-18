@@ -266,7 +266,7 @@ askTOS(() => promptUserLogin(async (playground) => {
 	process.nextTick(scandir, cwd);
 	const hound = require('hound');
 	const watcher = hound.watch(cwd);
-	const queueFile = (file) => ((file.split('/').pop()[0] !== '.') && uploadqueue.push(file));
+	const queueFile = (file) => ((file.split('/').filter(a => a[0] === '.')).length || uploadqueue.push(file));
 	watcher.on('create', queueFile);
 	watcher.on('change', queueFile);
 	watcher.on('delete', queueFile);
