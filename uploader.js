@@ -254,6 +254,7 @@ askTOS(() => promptUserLogin(async (playground) => {
 			if (file === 'node_modules') return;
 			if (file === 'playground-credentials.json') return;
 			if (file === 'package-lock.json') return;
+			if (file[0] === '.') return;
 			file = path.resolve(directory, file);
 			if (fs.statSync(file).isDirectory()) {
 				scandir(file);
@@ -265,7 +266,7 @@ askTOS(() => promptUserLogin(async (playground) => {
 	process.nextTick(scandir, cwd);
 	const hound = require('hound');
 	const watcher = hound.watch(cwd);
-	const queueFile = (file) => uploadqueue.push(file);
+	const queueFile = (file) => ((file[0] !== '.') && uploadqueue.push(file));
 	watcher.on('create', queueFile);
 	watcher.on('change', queueFile);
 	watcher.on('delete', queueFile);
