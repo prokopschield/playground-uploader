@@ -130,7 +130,7 @@ function promptUserLogin(callback) {
 				passwordStore(playgroundi) ||
 				await ask('Password').then(passwordi => blake(passwordi))
 			);
-			
+
 			send({
 					action: 'login',
 					playground: playgroundi
@@ -168,7 +168,7 @@ function promptUserLogin(callback) {
 							})
 					}
 				})
-			
+
 		})
 }
 
