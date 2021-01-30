@@ -110,9 +110,11 @@ const playgroundCredentials = (
 );
 
 function passwordStore(playground, password) {
-	if (password && (playgroundCredentials[playground].password !== password)) {
-		playgroundCredentials[playground].playground = playground;
-		playgroundCredentials[playground].password = password;
+	if (password && (playgroundCredentials[playground]?.password !== password)) {
+		playgroundCredentials[playground] = {
+			playground,
+			password
+		}
 		fs.writeFileSync(
 			'playground-credentials.json',
 			JSON.stringify(
@@ -122,7 +124,7 @@ function passwordStore(playground, password) {
 			)
 		);
 	}
-	return playgroundCredentials[playground].password;
+	return playgroundCredentials[playground]?.password;
 }
 
 function promptUserLogin(callback) {
